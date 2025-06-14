@@ -1,0 +1,129 @@
+.container {
+  padding: 2rem;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+button{
+  margin-right: 6px;
+}
+
+.materialCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.materialHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.variantSection {
+  margin-top: 1rem;
+  padding-left: 1rem;
+}
+
+.variantCard {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+}
+
+.variantHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subVariants {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
+
+.subVariantRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.editButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.editButton:hover {
+  background-color: #388e3c;
+}
+
+.deleteButton {
+  background-color: #e74c3c;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.deleteButton:hover {
+  background-color: #c0392b;
+}
+
+.editButtonSmall {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.editButtonSmall:hover {
+  background-color: #388e3c;
+}
+
+.deleteButtonSmall {
+  background-color: #e67e22;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.deleteButtonSmall:hover {
+  background-color: #d35400;
+}
+
+.editField input {
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

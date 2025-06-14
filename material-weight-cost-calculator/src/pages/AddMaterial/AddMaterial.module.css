@@ -1,0 +1,92 @@
+.container {
+  padding: 2rem;
+  background-color: #f0f4f8;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+}
+
+.form {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fieldGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #34495e;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.inputSmall {
+  width: 48%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.buttonPrimary {
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.buttonSecondary {
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.subSection {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.subTitle {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.variantRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.subVariants {
+  margin-top: 1rem;
+}
