@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import {
+  collection,
+  addDoc,
   deleteDoc,
   doc,
-  updateDoc
+  updateDoc,
 } from 'firebase/firestore';
 import { fetchAllMaterials } from '../../utils/fetchMaterials';
 import styles from './EditMaterials.module.css';
@@ -87,6 +89,60 @@ const EditMaterials = () => {
     await fetchMaterials();
   };
 
+  const handleAddMaterial = async () => {
+    const name = prompt('Enter material name:');
+    const type = prompt('Enter type (length-based or volume-based):');
+    const hasSubMaterials = window.confirm('Does it have sub-materials?');
+    const hasSubSubMaterials = hasSubMaterials
+      ? window.confirm('Does it have sub-sub-materials?')
+      : false;
+
+    let materialData = {
+      name,
+      type,
+      hasSubMaterials,
+      hasSubSubMaterials,
+    };
+
+    if (!hasSubMaterials) {
+      if (type === 'length-based') {
+        materialData.weightPerMeter = parseFloat(prompt('Enter weight per meter (kg):'));
+      } else {
+        materialData.density = parseFloat(prompt('Enter density (g/cm³):'));
+      }
+    }
+
+    await addDoc(collection(db, 'materials'), materialData);
+    await fetchMaterials();
+  };
+
+  const handleAddVariant = async (materialId, type, hasSubSubMaterials) => {
+    const name = prompt('Enter sub material name:');
+    let variantData = { name };
+
+    if (!hasSubSubMaterials) {
+      if (type === 'length-based') {
+        variantData.weightPerMeter = parseFloat(prompt('Enter weight per meter (kg):'));
+      } else {
+        variantData.density = parseFloat(prompt('Enter density (g/cm³):'));
+      }
+    }
+
+    await addDoc(collection(db, 'materials', materialId, 'variants'), variantData);
+    await fetchMaterials();
+  };
+
+  const handleAddSubVariant = async (materialId, variantId) => {
+    const name = prompt('Enter sub-sub material name:');
+    const weightPerMeter = parseFloat(prompt('Enter weight per meter (kg):'));
+
+    await addDoc(collection(db, 'materials', materialId, 'variants', variantId, 'subVariants'), {
+      name,
+      weightPerMeter,
+    });
+    await fetchMaterials();
+  };
+
   useEffect(() => {
     fetchMaterials();
   }, []);
@@ -94,23 +150,16 @@ const EditMaterials = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Edit/Delete Materials</h2>
+
+      <button onClick={handleAddMaterial} className={styles.addButton}>➕ Add Material</button>
+
       {materials.map((material) => (
         <div key={material.id} className={styles.materialCard}>
           <div className={styles.materialHeader}>
             <h3>{material.name}</h3>
             <div>
-              <button
-                onClick={() => handleEditMaterial(material)}
-                className={styles.editButton}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(material.id)}
-                className={styles.deleteButton}
-              >
-                Delete
-              </button>
+              <button onClick={() => handleEditMaterial(material)} className={styles.editButton}>Edit</button>
+              <button onClick={() => handleDelete(material.id)} className={styles.deleteButton}>Delete</button>
             </div>
           </div>
           <p><strong>Type:</strong> {material.type}</p>
@@ -132,18 +181,11 @@ const EditMaterials = () => {
                   <div className={styles.variantHeader}>
                     <strong>{variant.name}</strong>
                     <div>
-                      <button
-                        onClick={() => handleEditVariant(material.id, material, variant)}
-                        className={styles.editButtonSmall}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDeleteVariant(material.id, variant.id)}
-                        className={styles.deleteButtonSmall}
-                      >
-                        Delete
-                      </button>
+                      <button onClick={() => handleEditVariant(material.id, material, variant)} className={styles.editButtonSmall}>Edit</button>
+                      <button onClick={() => handleDeleteVariant(material.id, variant.id)} className={styles.deleteButtonSmall}>Delete</button>
+                      {material.hasSubSubMaterials && (
+                        <button onClick={() => handleAddSubVariant(material.id, variant.id)} className={styles.addButtonSmall}>Add Sub-Sub</button>
+                      )}
                     </div>
                   </div>
 
@@ -151,26 +193,10 @@ const EditMaterials = () => {
                     <div className={styles.subVariants}>
                       {variant.subVariants.map((sub) => (
                         <div key={sub.id} className={styles.subVariantRow}>
-                          <span>
-                            {sub.name} — Weight per Meter: {sub.weightPerMeter} kg/m
-                          </span>
+                          <span>{sub.name} — Weight per Meter: {sub.weightPerMeter} kg/m</span>
                           <div>
-                            <button
-                              onClick={() =>
-                                handleEditSubVariant(material.id, variant.id, sub)
-                              }
-                              className={styles.editButtonSmall}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleDeleteSubVariant(material.id, variant.id, sub.id)
-                              }
-                              className={styles.deleteButtonSmall}
-                            >
-                              Delete
-                            </button>
+                            <button onClick={() => handleEditSubVariant(material.id, variant.id, sub)} className={styles.editButtonSmall}>Edit</button>
+                            <button onClick={() => handleDeleteSubVariant(material.id, variant.id, sub.id)} className={styles.deleteButtonSmall}>Delete</button>
                           </div>
                         </div>
                       ))}
@@ -184,6 +210,7 @@ const EditMaterials = () => {
                   )}
                 </div>
               ))}
+              <button onClick={() => handleAddVariant(material.id, material.type, material.hasSubSubMaterials)} className={styles.addButtonSmall}>➕ Add Sub-Material</button>
             </div>
           )}
         </div>

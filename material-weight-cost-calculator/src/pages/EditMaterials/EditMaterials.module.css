@@ -11,10 +11,6 @@
   margin-bottom: 2rem;
 }
 
-button{
-  margin-right: 6px;
-}
-
 .materialCard {
   background-color: #ffffff;
   border-radius: 8px;
@@ -59,20 +55,23 @@ button{
   padding: 0.3rem 0;
 }
 
-.buttonGroup {
-  display: flex;
-  gap: 10px;
-  margin-top: 0.5rem;
+button {
+  margin-right: 8px;
+}
+
+.editButton,
+.deleteButton,
+.addButton {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .editButton {
   background-color: #4caf50;
   color: white;
-  border: none;
-  padding: 6px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
 }
 
 .editButton:hover {
@@ -82,25 +81,35 @@ button{
 .deleteButton {
   background-color: #e74c3c;
   color: white;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
 }
 
 .deleteButton:hover {
   background-color: #c0392b;
 }
 
+.addButton {
+  background-color: #3498db;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.addButton:hover {
+  background-color: #2c80b4;
+}
+
+.editButtonSmall,
+.deleteButtonSmall,
+.addButtonSmall {
+  padding: 4px 8px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .editButtonSmall {
   background-color: #4caf50;
   color: white;
-  border: none;
-  padding: 4px 8px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 13px;
 }
 
 .editButtonSmall:hover {
@@ -110,15 +119,19 @@ button{
 .deleteButtonSmall {
   background-color: #e67e22;
   color: white;
-  padding: 4px 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
 }
 
 .deleteButtonSmall:hover {
   background-color: #d35400;
+}
+
+.addButtonSmall {
+  background-color: #3498db;
+  color: white;
+}
+
+.addButtonSmall:hover {
+  background-color: #2c80b4;
 }
 
 .editField input {
